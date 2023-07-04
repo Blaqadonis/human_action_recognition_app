@@ -83,8 +83,6 @@ Clone this repository ``` git clone https://github.com/Blaqadonis/human_action_r
 
 Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
 
- 
-Run the notebook  ```human-action-recognition.ipynb``` to save the tensorflow model.
 
  
 Next, spin up the MLflow server with:
