@@ -1,0 +1,9 @@
+tensorflow
+pandas
+numpy
+pillow
+flask
+requests
+waitress
+mlflow
+prefect
