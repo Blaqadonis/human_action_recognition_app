@@ -190,7 +190,11 @@ Navigate to batch directory. Spin up Prefect server with  ```prefect server star
 In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
 
 
-Next, create and start a process pool with  ```prefect worker start -p zoompool -t process```
+Next, create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
+
+
+
+Replace ```<name_of_pool>``` with any title you want for your work pool.
 
 
 Run:  
