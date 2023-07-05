@@ -52,7 +52,10 @@ application scenarios.
 Consequently, lots of existing works have attempted to investigate different types of approaches for HAR using various modalities.
 
 
-This project was just to build an Image Classification Model using CNN that classifies several human actions.
+This project was just to build an Image Classification Model using CNN that classifies several human actions, for the completion of MLOPs Zoomcamp 2023 cohort
+
+
+course hosted by [DataTalksClub](https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A71802369&keywords=datatalksclub&origin=RICH_QUERY_SUGGESTION&position=0&searchId=0157507a-27bf-439c-b717-8394da03a0fb&sid=6~t)
 
 
 ## Downloading the data:
