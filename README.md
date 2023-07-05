@@ -89,7 +89,7 @@ Clone this repository ``` git clone https://github.com/Blaqadonis/human_action_r
 Next, cut ```test``` folder and paste into ```batch``` folder. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. 
 
 
-So also cut and paste that file in the ```test``` folder.
+So also cut and paste that file in the ```batch``` folder.
  
 
 Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
