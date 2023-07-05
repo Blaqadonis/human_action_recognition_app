@@ -81,9 +81,14 @@ Next:
 
  ```conda activate <env-name>``` to activate the environment.
 
+
 Navigate into the local folder where you extracted the zip file at. 
 
+
 Clone this repository ``` git clone https://github.com/Blaqadonis/human_action_recognition_app.git ```
+
+
+Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
 
 
 Next, cut ```test``` folder and paste into ```batch``` folder. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. 
@@ -91,8 +96,6 @@ Next, cut ```test``` folder and paste into ```batch``` folder. For educative pur
 
 So also cut and paste that file in the ```batch``` folder.
  
-
-Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
 
 
  
