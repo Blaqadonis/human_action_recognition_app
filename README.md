@@ -156,7 +156,21 @@ Edit it as much as you want and try out predictions on some other images of huma
   
 Still inside the webservice directory, you need to run:    ```python predict.py``` to start this service.
 
-Open up a new terminal. Run ```python test.py``` to interact with the service.
+
+
+Perhaps you want to use a Web Service Gateway Interface (WSGI) like Waitress or Gunicorn:
+
+
+
+```waitress-serve --listen=0.0.0.0:9696 predict:app```           or 
+
+
+
+```gunicorn --bind=0.0.0.0:9696 predict:app```
+
+
+After starting this service, open up a new terminal. Run ```python test.py``` to use the service.
+
 
 
 ### 3. Web service hosted and managed on MLflow servers
@@ -172,7 +186,7 @@ run ```python tracking_predict.py``` in one terminal, followed by
 
 
 
-**Caveat** ```register_model.py```  is a script that enters your model into the mlflow registry when you run 
+**Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run 
 
 
 ```python register_model.py ```
