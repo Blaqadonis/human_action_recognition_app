@@ -145,7 +145,7 @@ If the container is up and running, open up a new terminal. Reactivate the Conda
 Run ```python test.py```
 
 
-NOTE: ```test.py``` is an example of data you can send to the ENTRYPOINT to interact with the service. This data is expected to be an image url.
+NOTE: ```test.py``` is an example of data you can send to the inference point to interact with the service. This data is expected to be an image url.
 
 
 Edit it as much as you want and try out predictions on some other images of humans performing any of the 14 activities listed above.
@@ -156,7 +156,21 @@ Edit it as much as you want and try out predictions on some other images of huma
   
 Still inside the webservice directory, you need to run:    ```python predict.py``` to start this service.
 
-Open up a new terminal. Run ```python test.py``` to interact with the service.
+
+
+Perhaps you want to use a Web Service Gateway Interface (WSGI) like Waitress or Gunicorn:
+
+
+
+```waitress-serve --listen=0.0.0.0:9696 predict:app```           or 
+
+
+
+```gunicorn --bind=0.0.0.0:9696 predict:app```
+
+
+After starting this service, open up a new terminal. Run ```python test.py``` to use the service.
+
 
 
 ### 3. Web service hosted and managed on MLflow servers
@@ -172,7 +186,7 @@ run ```python tracking_predict.py``` in one terminal, followed by
 
 
 
-**Caveat** ```register_model.py```  is a script that enters your model into the mlflow registry when you run 
+**Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run 
 
 
 ```python register_model.py ```
@@ -190,7 +204,11 @@ Navigate to batch directory. Spin up Prefect server with  ```prefect server star
 In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
 
 
-Next, create and start a process pool with  ```prefect worker start -p zoompool -t process```
+Next, create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
+
+
+
+Replace ```<name_of_pool>``` with any title you want for your work pool.
 
 
 Run:  
@@ -206,10 +224,10 @@ Then schedule a deployment using CRON    ```python batch_deploy.py```
 Replace ```<path/to/Testing_set.csv>``` with path to your test file, and ```<MLflow Run ID>``` with your MLflow Run ID.
 
 
-For educative purposes, I am using the test data for offline batch deployment.
+For educative purposes, I am using the test set for offline batch deployment.
 
 
-Deployment is currently scheduled to run every month at 00:00. However, you can edit the scheduled date to whenever you wish the deployment to be done. 
+Deployment is currently scheduled to run every new month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. 
 
 
 To do this, open  ```batch_deploy.py``` with a text editor and adjust the CRON digits.
