@@ -7,6 +7,8 @@ from tensorflow import keras
 from prefect import task, flow, get_run_logger
 from PIL import Image
 from prefect_email import EmailServerCredentials, email_send_message
+from prefect.artifacts import create_markdown_artifact
+from datetime import date
 
 def load_model(run_id):
     '''Loading the model'''    
@@ -16,7 +18,7 @@ def load_model(run_id):
 def read_predict(file_names, model):
     '''Reading and making predictions'''
     predictions = []
-    test_folder = 'test'
+    test_folder = 'test'   
     
     for file_name in file_names:
         file_path = os.path.join(test_folder, file_name)
@@ -58,7 +60,7 @@ def save_results(predictions, run_id, output_file):
     predictions_df.to_csv(output_file, index=False)
     
 
-@task
+@task(retries=3, retry_delay_seconds=2, name="Apply HAR Model")
 def apply_model(csv_file, run_id, output_file):
     '''Applying everything'''
     logger = get_run_logger()
@@ -70,29 +72,47 @@ def apply_model(csv_file, run_id, output_file):
     predictions = read_predict(file_names, model)
     logger.info(f'Saving the results to {output_file}...')
     save_results(predictions, run_id, output_file)
+
+    markdown__prediction_report = f"""# Batch Testing_set.csv Prediction Report
+
+        ## Summary
+
+        Duration Prediction 
+
+        ## TensorFlow Model
+
+        | On    | 
+        |:----------|-------:|
+        | {date.today()} | 
+        """
+
+    create_markdown_artifact(
+            key="batch-testing-prediction-report", markdown=markdown__prediction_report
+        )
+
     return output_file
 
-block = "update-me"
-email = "chinonsoodiaka@gmail.com"
-password = "gdvooirlezvdtzbb"
 
 
 
-credentials = EmailServerCredentials(
-    username=email,
-    password=password,  # must be an app password
-)
-credentials.save(block, overwrite=True)
 
 
 @flow
-def send_update(email_address:  str):
+def send_update(block: str, email_address: str, password: str):
     '''Notify the ML engineer'''
+    block = block
+    password = password
+    
+    credentials = EmailServerCredentials(
+    username=email_address,
+    password=password,  # must be an app password
+    )
+    credentials.save(block, overwrite=True)
     email_server_credentials = EmailServerCredentials.load(block)
     
     subject = email_send_message.with_options(name=f"email {email_address}").submit(
     email_server_credentials=email_server_credentials,
-    subject="Example Flow Notification using Gmail",
+    subject="Batch Testing Run Status",
     msg="Run completed!!",
     email_to=email_address,
         )
@@ -101,11 +121,14 @@ def send_update(email_address:  str):
 def run():
     '''run function'''
     csv_file = sys.argv[1]  # 'Testing_set.csv'
-    run_id = sys.argv[2]  # 'd347fb6459524bb8b28cf4254ae52850'
-    output_file = 'batch/output/result.csv'
-   
+    run_id = sys.argv[2]  # 'MLflow Run ID'
+    block = sys.argv[3]   #'update-me'
+    email = sys.argv[4]   #'your-email-address'
+    password = sys.argv[5]  #'your-app-password'
+    output_file = 'output/result.csv'   
     apply_model(csv_file=csv_file, run_id=run_id, output_file=output_file)
-    return print('Done!')
+    send_update(block=block, email_address=email, password=password)
+    return print('Run completed! Status sent to your email.')
 
 if __name__ == '__main__':
     run()
