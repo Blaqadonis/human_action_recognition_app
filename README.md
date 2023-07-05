@@ -84,6 +84,12 @@ Next:
 Navigate into the local folder where you extracted the zip file at. 
 
 Clone this repository ``` git clone https://github.com/Blaqadonis/human_action_recognition_app.git ```
+
+
+Next, cut ```test``` folder and paste into ```batch``` folder. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. 
+
+
+So also cut and paste that file in the ```test``` folder.
  
 
 Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
@@ -107,7 +113,7 @@ First, you need to have docker installed on your system. I am using a windows ma
 If you do not have that then you should try doing that first. If you are all set and good, then proceed.
 
 
-Navigate to webservice directory.
+Navigate to webservice directory. 
 
 
 Next, Run ```docker build -t <service-name>:v1 .```
@@ -198,7 +204,13 @@ run ```python tracking_predict.py``` in one terminal, followed by
 ### 4. Batch mode (Scheduling)
 
 
-Navigate to batch directory. Spin up Prefect server with  ```prefect server start```
+Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. Also create a directory called  ```output```. 
+
+
+This is for saving the output predictions locally. Your run will not be completed if you omit any of these steps.
+
+
+Spin up Prefect server with  ```prefect server start```
 
 
 In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
@@ -214,20 +226,43 @@ Replace ```<name_of_pool>``` with any title you want for your work pool.
 Run:  
 
 
-```python batch.py <path/to/Testing_set.csv> <MLflow Run ID>``` to initiate a flow. 
+```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. 
 
 
 
 Then schedule a deployment using CRON    ```python batch_deploy.py```
 
 
-Replace ```<path/to/Testing_set.csv>``` with path to your test file, and ```<MLflow Run ID>``` with your MLflow Run ID.
+I created a separate file which is just ```batch.py``` but with extra stuff. This file ```custom_batch.py``` can send you notifications straight to your inbox about the status 
 
 
-For educative purposes, I am using the test set for offline batch deployment.
+
+of the run. It also contains a report about the predictions for documenting. To run this, you require an email account password. This app password will provide 
 
 
-Deployment is currently scheduled to run every new month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. 
+
+access to your email account without revealing your actual account password. For more on this >>> [Google.](https://support.google.com/mail/answer/185833?hl=en)
+
+
+
+If you now have your email app password, run
+
+
+
+```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>``` to initiate a flow.
+
+
+
+Replace ```<MLflow Run ID>``` with your MLflow Run ID. Same to ```<your_email_address>```  and ``` <email_app_password>``` too. 
+
+
+Then schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
+
+
+Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you wish the 
+
+
+deployment to be done. 
 
 
 To do this, open  ```batch_deploy.py``` with a text editor and adjust the CRON digits.
