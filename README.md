@@ -99,11 +99,14 @@ So also cut and paste that file in the ```batch``` folder.
 
 
  
-Next, spin up the MLflow server with:
+Use this to spin up the MLflow server:
 
 ```mlflow server --backend-store-uri sqlite:///local_server.db --default-artifact-root ./artifacts --host localhost --port 5000```
 
-This will create a folder ```artifacts``` on your local machine, as well as the database ```local_server```.
+This will create a folder ```artifacts``` on your local machine, as well as the database ```local_server```. Do not spin it up yet until you are in the directory
+
+
+that you want to run its mode of deployment. This is very important.
 
 
 
@@ -187,6 +190,9 @@ After starting this service, open up a new terminal. Run ```python test.py``` to
 Still inside the webservice directory, 
 
 
+Spin up the MLflow server using the command mentioned earlier.
+
+
 run ```python tracking_predict.py``` in one terminal, followed by 
 
 
@@ -217,6 +223,9 @@ Spin up Prefect server with  ```prefect server start```
 
 
 In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
+
+
+Spin up the MLflow server.
 
 
 Next, create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
