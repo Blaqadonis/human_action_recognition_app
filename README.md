@@ -145,7 +145,7 @@ If the container is up and running, open up a new terminal. Reactivate the Conda
 Run ```python test.py```
 
 
-NOTE: ```test.py``` is an example of data you can send to the ENTRYPOINT to interact with the service. This data is expected to be an image url.
+NOTE: ```test.py``` is an example of data you can send to the inference point to interact with the service. This data is expected to be an image url.
 
 
 Edit it as much as you want and try out predictions on some other images of humans performing any of the 14 activities listed above.
