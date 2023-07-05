@@ -213,7 +213,7 @@ Replace ```<path/to/Testing_set.csv>``` with path to your test file, and ```<MLf
 For educative purposes, I am using the test data for offline batch deployment.
 
 
-Deployment is currently scheduled to run every month at 00:00. However, you can edit the scheduled date to whenever you wish the deployment to be done. 
+Deployment is currently scheduled to run every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. 
 
 
 To do this, open  ```batch_deploy.py``` with a text editor and adjust the CRON digits.
