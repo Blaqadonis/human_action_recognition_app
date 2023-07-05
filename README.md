@@ -210,7 +210,7 @@ Then schedule a deployment using CRON    ```python batch_deploy.py```
 Replace ```<path/to/Testing_set.csv>``` with path to your test file, and ```<MLflow Run ID>``` with your MLflow Run ID.
 
 
-For educative purposes, I am using the test data for offline batch deployment.
+For educative purposes, I am using the test set for offline batch deployment.
 
 
 Deployment is currently scheduled to run every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. 
