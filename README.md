@@ -52,7 +52,12 @@ application scenarios.
 Consequently, lots of existing works have attempted to investigate different types of approaches for HAR using various modalities.
 
 
-This project was just to build an Image Classification Model using CNN that classifies several human actions.
+This project was just to build an Image Classification Model using CNN that classifies several human actions, turn this to a production pipeline, try out 
+
+
+
+different deployment modes, and to make use of some of the MLOPs tools we used in MLOPs Zoomcamp 2023 cohort course for the completion of the course hosted by 
+[DataTalksClub](https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A71802369&keywords=datatalksclub&origin=RICH_QUERY_SUGGESTION&position=0&searchId=0157507a-27bf-439c-b717-8394da03a0fb&sid=6~t) 
 
 
 ## Downloading the data:
@@ -83,8 +88,6 @@ Clone this repository ``` git clone https://github.com/Blaqadonis/human_action_r
 
 Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
 
- 
-Run the notebook  ```human-action-recognition.ipynb``` to save the tensorflow model.
 
  
 Next, spin up the MLflow server with:
