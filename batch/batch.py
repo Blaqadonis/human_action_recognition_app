@@ -72,36 +72,12 @@ def apply_model(csv_file, run_id, output_file):
     save_results(predictions, run_id, output_file)
     return output_file
 
-block = "update-me"
-email = "chinonsoodiaka@gmail.com"
-password = "gdvooirlezvdtzbb"
-
-
-
-credentials = EmailServerCredentials(
-    username=email,
-    password=password,  # must be an app password
-)
-credentials.save(block, overwrite=True)
-
-
-@flow
-def send_update(email_address:  str):
-    '''Notify the ML engineer'''
-    email_server_credentials = EmailServerCredentials.load(block)
-    
-    subject = email_send_message.with_options(name=f"email {email_address}").submit(
-    email_server_credentials=email_server_credentials,
-    subject="Example Flow Notification using Gmail",
-    msg="Run completed!!",
-    email_to=email_address,
-        )
 
 @flow
 def run():
     '''run function'''
     csv_file = sys.argv[1]  # 'Testing_set.csv'
-    run_id = sys.argv[2]  # 'd347fb6459524bb8b28cf4254ae52850'
+    run_id = sys.argv[2]  # 'your-MLflow-Run_id'
     output_file = 'batch/output/result.csv'
    
     apply_model(csv_file=csv_file, run_id=run_id, output_file=output_file)
