@@ -6,7 +6,7 @@ import numpy as np
 from tensorflow import keras
 from prefect import task, flow, get_run_logger
 from PIL import Image
-from prefect_email import EmailServerCredentials, email_send_message
+
 
 def load_model(run_id):
     '''Loading the model'''    
