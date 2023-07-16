@@ -287,5 +287,11 @@ For more on CRON, [Click Here.](https://crontab.guru/)
 
 
 
+### 5. Monitoring
+
+
+Navigate to that directory and run the notebook. Generate an Evidently report. Check for data and concept drifts.
+
+
 Try this out with family, friends, colleagues, neighbours, and let me know how to improve on it.
 
