@@ -3,27 +3,31 @@ import os
 from flask import Flask, request, jsonify
 import numpy as np
 from PIL import Image
+import tensorflow as tf
 from tensorflow import keras
 
+
 #with open('model.bin', 'rb') as f_out:
-   # model = pickle.load(f_out)
-model = keras.models.load_model('HARmodel_main.h5')
+   #model = pickle.load(f_out)
+model = tf.keras.models.load_model("HARmodel_main.h5")
+
+
 labels = {
-    0: "sitting",
-    1: "using laptop",
-    2: "hugging",
-    3: "sleeping",
+    0: "calling",
+    1: "clapping",
+    2: "cycling",
+    3: "dancing",
     4: "drinking",
-    5: "clapping",
-    6: "dancing",
-    7: "cycling",
-    8: "calling",
-    9: "laughing",
-    10: "eating",
-    11: "fighting",
-    12: "listening_to_music",
-    13: "running",
-    14: "texting"
+    5: "eating",
+    6: "fighting",
+    7: "hugging",
+    8: "laughing",
+    9: "listening_to_music",
+    10: "running",
+    11: "sitting",
+    12: "sleeping",
+    13: "texting",
+    14: "using_laptop"
 }
 
 def preprocess_image(image):

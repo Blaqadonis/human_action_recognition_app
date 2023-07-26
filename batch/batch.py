@@ -78,7 +78,7 @@ def run():
     '''run function'''
     csv_file = sys.argv[1]  # 'Testing_set.csv'
     run_id = sys.argv[2]  # 'your-MLflow-Run_id'
-    output_file = 'batch/output/result.csv'
+    output_file = 'output/result.csv'
    
     apply_model(csv_file=csv_file, run_id=run_id, output_file=output_file)
     return print('Done!')
