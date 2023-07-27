@@ -159,7 +159,7 @@ Still inside the webservice directory,
 
 
 
-### 4. Batch mode (Scheduling with the Prefect 2.0 server - orion)
+### 4. Batch mode (Scheduling with Prefect orion server)
 
 
 1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. Also create a directory called  ```output```. This is for saving the output predictions locally. Your run will not be completed if you omit any of these steps.
