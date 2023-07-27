@@ -151,9 +151,7 @@ Still inside the webservice directory,
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
 
 
-   **Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run
-   
-4. ```python register_model.py ```
+   **Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run  ```python register_model.py ```
 
  
 
