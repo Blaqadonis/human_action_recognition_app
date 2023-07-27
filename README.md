@@ -60,17 +60,19 @@ Everything here runs locally. If you want to try out the service, follow the ste
 2. To create an environment with that version of python using Conda: ```conda create -n <env-name> python=3.10.11```
     Just replace ```<env-name>``` with any title you want.
 3. Next:   ```conda activate <env-name>``` to activate the environment.
-4. Navigate into the local folder where you extracted the zip file at. 
+4. Navigate into the local directory where you extracted the zip file at. 
 5. Clone this repository ``` git clone https://github.com/Blaqadonis/human_action_recognition_app.git ```
 6. Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
-7. Cut ```test``` folder and paste into ```batch``` folder. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. Cut and paste that file in the ```batch``` folder.
+7. Create a directory and name it ```data```. Inside it cut and paste ```train``` directory and ```Training_set.csv```. This is only important if you want to run the notebook.
+8. Create a directory and name it ```output```. This is important if you want to run batch deployment.
+9. Cut ```test``` directory and paste into ```batch``` directory. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. Cut and paste that file in the ```batch``` directory.
  
 
 
  **CAVEAT:**  Use this to spin up the MLflow server:   
    ```mlflow server --backend-store-uri sqlite:///local_server.db --default-artifact-root ./artifacts --host localhost --port 5000```
 
-   This will create a folder ```artifacts``` on your local machine, as well as the database ```local_server.db```. Do not spin it up yet until you are in the directory that you want to run its mode of 
+   This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```. Do not spin it up yet until you are in the directory that you want to run its mode of 
    deployment. This is very important.
   
 
