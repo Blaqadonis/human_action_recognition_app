@@ -130,7 +130,7 @@ Still inside the webservice directory, you need to:
    
    ```waitress-serve --listen=0.0.0.0:9696 predict:app```           **OR**      
 
-   ```gunicorn --bind=0.0.0.0:9696 predict:app```
+   ```gunicorn --bind=0.0.0.0:9696 predict:app```   depending on what local machine you have.
 
 3. After starting this service, open up a new terminal. Run ```python test.py <image-url>```
 
