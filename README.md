@@ -51,7 +51,7 @@ This project was just to build an Image Classification Model using CNN that clas
 
 ## Downloading the data:
 
-The data is quite heavy hence the link. Click the link to begin download of the zip file. Extract all contents of zip file in your local directory.
+The data is quite heavy hence the link. Click the link below to begin download of the zip file. Extract all contents of zip file in your local directory.
 
  [Click Here.](https://dphi-live.s3.eu-west-1.amazonaws.com/dataset/Human+Action+Recognition-20220526T101201Z-001.zip)
 
