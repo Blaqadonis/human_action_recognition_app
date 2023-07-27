@@ -57,7 +57,7 @@ The data is quite heavy hence the link. Click the link below to begin download o
 
 ## Running this service:
 
-Everything here runs locally. If you want to try out the service, follow the steps below:
+Everything here runs locally. If you want to try out the service, follow the steps below (You will require Git Bash CLI for the following commands):
 1. Create a virtual environment. I used ```python version 3.10.11``` 
 2. To create an environment with that version of python using Conda: ```conda create -n <env-name> python=3.10.11```
     Just replace ```<env-name>``` with any title you want.
