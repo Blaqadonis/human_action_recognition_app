@@ -1,5 +1,4 @@
 import os
-#import pickle
 from flask import Flask, request, jsonify
 import numpy as np
 from PIL import Image
@@ -7,8 +6,6 @@ import tensorflow as tf
 from tensorflow import keras
 
 
-#with open('model.bin', 'rb') as f_out:
-   #model = pickle.load(f_out)
 model = tf.keras.models.load_model("HARmodel_main.h5")
 
 
