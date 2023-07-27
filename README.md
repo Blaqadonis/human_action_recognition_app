@@ -10,7 +10,7 @@
 
 
 
-This is my MLOPs Zoomcamp 2023 cohort's course project.
+This is my 2023 MLOPs Zoomcamp course project.
 
 
 ## Understanding the service:
