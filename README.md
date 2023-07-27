@@ -195,7 +195,7 @@ Still inside the webservice directory,
 10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
 
 
-    Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. To do this, open  
+    Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you want the deployment to be done. To do this, open  
     ```batch_deploy.py``` with a text editor and adjust the CRON digits.
 
 
