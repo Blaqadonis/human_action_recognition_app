@@ -138,7 +138,7 @@ Still inside the webservice directory, you need to:
 
 
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
-7. Edit it as much as you want, and try out predictions on some other images of humans performing any of the 14 activities listed above, to use the service.
+   Edit it as much as you want, and try out predictions on some other images of humans performing any of the 14 activities listed above, to use the service.
 
 
 
