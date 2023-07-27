@@ -76,8 +76,6 @@ Everything here runs locally. If you want to try out the service, follow the ste
    ```mlflow server --backend-store-uri sqlite:///local_server.db --default-artifact-root ./artifacts --host localhost --port 5000```
 
    This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```.
-
-   Explore the MLflow UI here:  http://localhost:5000
    
    **Wait!!! Do not spin it up yet until you are ready to track runs and make use of the MLflow server. This is very important.**
   
@@ -155,11 +153,10 @@ Still inside the webservice directory,
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
 
 
-   **Caveat:** ```register_model.py```  is a script that enters your model into the MLflow registry, and also transitions it to production stage. You can alter this via the UI, and transition the model to 
-   whatever stage of production you want.
+   **Caveat:** ```register_model.py```  is a script that enters your model into the MLflow registry, and also transitions it to production stage.
 
 
-4. To register your  run  ```python register_model.py ```
+4. To register your  model with MLflow registry, and to elevate its stage to production stage, run  ```python register_model.py ```
 
  
 
