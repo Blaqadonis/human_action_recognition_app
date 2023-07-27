@@ -179,7 +179,7 @@ Still inside the webservice directory,
 8. Schedule a deployment using CRON    ```python batch_deploy.py```
 
 
-   I created a separate file which is just ```batch.py``` but with extra stuff. This file ```custom_batch.py``` can send you notifications straight to your inbox about the status of the run. It also contains a 
+   I created a separate file which is basically ```batch.py``` but with extra stuff. This file ```custom_batch.py``` can send you notifications straight to your inbox about the status of the run. It also contains a 
    report about the predictions for documenting. To run this, you require an email account password. This app password will provide access to your email account without revealing your actual account password. 
    For more on this >>> [Google.](https://support.google.com/mail/answer/185833?hl=en)
 
