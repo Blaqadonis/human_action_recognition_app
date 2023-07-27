@@ -112,6 +112,7 @@ ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "predict:app" ]
 
 
 If the container is up and running, 
+
 5. Open up a new terminal. Reactivate the Conda environment. 
 6. Run ```python test.py <image-url>```
 
