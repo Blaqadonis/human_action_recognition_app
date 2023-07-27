@@ -81,7 +81,7 @@ Everything here runs locally. If you want to try out the service, follow the ste
   
 
 
-### 1. Running the container (Dockerfile)
+### 1. Docker container
 
 
 First, you need to have docker installed on your system. I am using a windows machine, and I have docker desktop installed on my system. If you do not have that then you should try doing that first. If you are all set and good, then proceed.
