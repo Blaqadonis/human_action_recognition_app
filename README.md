@@ -67,7 +67,7 @@ Everything here runs locally. If you want to try out the service, follow the ste
 6. Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
 7. Create a directory and name it ```data```. Inside it cut and paste ```train``` directory and ```Training_set.csv```. This is only important if you want to run the notebook.
 8. Create a directory and name it ```output```. This is important if you want to run batch deployment.
-9. Cut ```test``` directory and paste into ```batch``` directory. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. Cut and paste that file in the ```batch``` directory.
+9. Cut ```test``` directory and paste into ```batch``` directory. I will be using ```Testing_set.csv``` for scheduled deployment. Cut and paste that file in the ```batch``` directory.
  
 
 
@@ -176,7 +176,14 @@ Still inside the webservice directory,
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
 6. Replace ```<name_of_pool>``` with any title you want for your work pool.
 7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
-8. Schedule a deployment using CRON    ```python batch_deploy.py```
+8. Schedule a deployment using CRON    ```python batch_deploy.py <your-testing-batch> <MLflow Run ID> <your-cron-expression>```
+
+   Replace ```<your-testing-batch>``` with the files, in a .csv format, that you want to run the scheduled deployment on which in my case I will use ```Testing_set.csv```, ```<MLflow Run ID>``` with your MLflow Run ID, and 
+   ```<your-cron-expression>``` with your cron digits.
+
+   For example, to schedule a deployment to run on the first day of every month at midnight    ```python batch_deploy.py Testing_set.csv <MLflow Run ID> 0 0 1 * *```.
+
+   For more on CRON   [Click Here.](https://crontab.guru/)
 
 
    I created a separate file which is basically ```batch.py``` but with ***extra razzmatazz mixed with a likkle bit of sauce***. This file ```custom_batch.py``` can send you notifications on the status of the 
@@ -188,20 +195,19 @@ Still inside the webservice directory,
 
    If you now have your email app password, 
 
-9. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>``` to initiate a flow.
+11. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>``` to initiate a flow. 
+12. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
+
+    Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, and <your-cron-expression> with your cron 
+    digits.
+
+
    
-    Replace ```<MLflow Run ID>``` with your MLflow Run ID. Same to ```<your_email_address>```  and ``` <email_app_password>``` too. 
-
-10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
 
 
-    Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you want the deployment to be done. To do this, open  
-    ```batch_deploy.py``` with a text editor and adjust the CRON digits.
+    
 
-
-    For more on CRON   [Click Here.](https://crontab.guru/)
-
-    Explore the Prefect UI here:    http://localhost:4200
+   
 
 
 
