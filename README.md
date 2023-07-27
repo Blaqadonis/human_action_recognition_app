@@ -171,7 +171,7 @@ Still inside the webservice directory,
 4. Spin up the MLflow server.
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
 6. Replace ```<name_of_pool>``` with any title you want for your work pool.
-7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. 
+7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
 8. Schedule a deployment using CRON    ```python batch_deploy.py```
 
 
