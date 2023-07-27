@@ -45,7 +45,7 @@ Human Action Recognition (HAR) aims to identify human behavior. It has a wide ra
 Consequently, lots of existing works have attempted to investigate different types of approaches for HAR using various modalities.
 
 
-This project was just to build an Image Classification Model using CNN that classifies several human actions, turn this to a product service, using some MLOPs tools and observing industry best practices, as completion of the course - MLOPs Zoomcamp 2023 hosted by 
+This project was just to build an Image Classification Model using CNN that classifies several human actions, and to turn this to a product service, using some ML/DevOps tools while observing industry best practices, as completion of the course - MLOPs Zoomcamp 2023 hosted by 
 [DataTalksClub](https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A71802369&keywords=datatalksclub&origin=RICH_QUERY_SUGGESTION&position=0&searchId=0157507a-27bf-439c-b717-8394da03a0fb&sid=6~t) 
 
 
