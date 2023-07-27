@@ -143,7 +143,7 @@ Still inside the webservice directory, you need to:
 ### 3. Web service hosted and managed on MLflow servers
 
 Still inside the webservice directory, 
-1. Navigate to server.
+1. Navigate to ```server```.
 2. Spin up the MLflow server using the command mentioned earlier.
 3. Run:   ```python tracking_predict.py``` in one terminal, followed by  ```python tracking_test.py <image-url>```
 
