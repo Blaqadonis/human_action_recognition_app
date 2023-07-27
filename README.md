@@ -76,6 +76,8 @@ Everything here runs locally. If you want to try out the service, follow the ste
    ```mlflow server --backend-store-uri sqlite:///local_server.db --default-artifact-root ./artifacts --host localhost --port 5000```
 
    This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```.
+
+   Explore the MLflow UI here:  http://localhost:5000
    
    **Wait!!! Do not spin it up yet until you are ready to track runs and make use of the MLflow server. This is very important.**
   
@@ -151,7 +153,9 @@ Still inside the webservice directory,
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
 
 
-   **Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry. You can then decide, via the UI, what stage of production the trained model is at (http://localhost:5000/), 
+   **Caveat:** ```register_model.py```  is a script that enters your model into the MLflow registry, and also transitions it to production stage. You can alter this via the UI, and transition the model to 
+   whatever stage of production you want.
+
 
 4. To register your  run  ```python register_model.py ```
 
@@ -194,7 +198,9 @@ Still inside the webservice directory,
     ```batch_deploy.py``` with a text editor and adjust the CRON digits.
 
 
-    For more on CRON, [Click Here.](https://crontab.guru/)
+    For more on CRON   [Click Here.](https://crontab.guru/)
+
+    Explore the Prefect UI here:    http://localhost:4200
 
 
 
