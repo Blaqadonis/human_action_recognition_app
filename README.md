@@ -167,7 +167,7 @@ Still inside the webservice directory,
     **Your run will not be completed if you omit any part of this step.**
     
 2. Spin up Prefect server with  ```prefect server start```
-3. In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
+3. In another window, set its configuration to local configuration   ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
 4. Spin up the MLflow server.
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
 6. Replace ```<name_of_pool>``` with any title you want for your work pool.
