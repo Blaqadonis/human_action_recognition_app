@@ -72,9 +72,12 @@ Everything here runs locally. If you want to try out the service, follow the ste
 
 
  **CAVEAT:**  Use this to spin up the MLflow server:   
+ 
    ```mlflow server --backend-store-uri sqlite:///local_server.db --default-artifact-root ./artifacts --host localhost --port 5000```
 
-   This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```. **Wait! Do not spin it up yet until you are ready to track runs and make use of the MLflow server. This is very important.**
+   This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```.
+   
+   **Wait!!! Do not spin it up yet until you are ready to track runs and make use of the MLflow server. This is very important.**
   
 
 
