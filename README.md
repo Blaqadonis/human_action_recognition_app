@@ -1,4 +1,6 @@
-# Human Action Recognition Service by 🅱🅻🅰🆀
+# Human Action Recognition Service
+
+### Powered by 🅱🅻🅰🆀
 
 
 ![image](https://github.com/Blaqadonis/human_action_recognition_app/assets/100685852/10e0cc3b-b7ac-4f5d-a535-425c3d823001)
