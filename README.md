@@ -162,7 +162,10 @@ Still inside the webservice directory,
 ### 4. Batch mode (Scheduling with Prefect Orion server)
 
 
-1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. Also create a directory called  ```output```. This is for saving the output predictions locally. Your run will not be completed if you omit any of these steps.
+1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. If you have not created the ```output``` directory yet, then create one. This is for saving the output predictions locally.
+   
+    **Your run will not be completed if you omit any part of this step.**
+    
 2. Spin up Prefect server with  ```prefect server start```
 3. In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
 4. Spin up the MLflow server.
@@ -180,16 +183,16 @@ Still inside the webservice directory,
 
    If you now have your email app password, 
 
-9. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>``` to initiate a flow.
+11. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>``` to initiate a flow.
    
    Replace ```<MLflow Run ID>``` with your MLflow Run ID. Same to ```<your_email_address>```  and ``` <email_app_password>``` too. 
 
-10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
+11. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
 
 
     Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. To do this, 
 
-11. Open  ```batch_deploy.py``` with a text editor and adjust the CRON digits.
+12. Open  ```batch_deploy.py``` with a text editor and adjust the CRON digits.
 
 
     For more on CRON, [Click Here.](https://crontab.guru/)
