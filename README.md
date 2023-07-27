@@ -128,7 +128,7 @@ Still inside the webservice directory, you need to:
 1. Run  ```python predict.py``` to start this service.
 2. Perhaps you want to use a Web Service Gateway Interface (WSGI) like Waitress or Gunicorn:
    
-   ```waitress-serve --listen=0.0.0.0:9696 predict:app```           **OR**      
+   ```waitress-serve --listen=0.0.0.0:9696 predict:app```             **OR**      
 
    ```gunicorn --bind=0.0.0.0:9696 predict:app```   depending on what local machine you have.
 
