@@ -1,4 +1,6 @@
-# Human Action Recognition Service by 🅱🅻🅰🆀
+# Human Action Recognition Service
+
+### Powered by 🅱🅻🅰🆀
 
 
 ![image](https://github.com/Blaqadonis/human_action_recognition_app/assets/100685852/10e0cc3b-b7ac-4f5d-a535-425c3d823001)
@@ -8,7 +10,7 @@
 
 
 
-This is my MLOPs Zoomcamp 2023 cohort's course project.
+This is my 2023 MLOPs Zoomcamp course project.
 
 
 ## Understanding the service:
@@ -43,19 +45,19 @@ Human Action Recognition (HAR) aims to identify human behavior. It has a wide ra
 Consequently, lots of existing works have attempted to investigate different types of approaches for HAR using various modalities.
 
 
-This project was just to build an Image Classification Model using CNN that classifies several human actions, turn this to a product service, using some MLOPs tools and observing industry best practices, as completion of the course - MLOPs Zoomcamp 2023 hosted by 
+This project was just to build an Image Classification Model using CNN that classifies several human actions, and to turn this to a product service, using some ML/DevOps tools while observing industry best practices, as completion of the course - MLOPs Zoomcamp 2023 hosted by 
 [DataTalksClub](https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A71802369&keywords=datatalksclub&origin=RICH_QUERY_SUGGESTION&position=0&searchId=0157507a-27bf-439c-b717-8394da03a0fb&sid=6~t) 
 
 
 ## Downloading the data:
 
-The data is quite heavy hence the link. Click the link to begin download of the zip file. Extract all contents of zip file in your local directory.
+The data is quite heavy hence the link. Click the link below to begin download of the zip file. Extract all contents of zip file in your local directory.
 
  [Click Here.](https://dphi-live.s3.eu-west-1.amazonaws.com/dataset/Human+Action+Recognition-20220526T101201Z-001.zip)
 
 ## Running this service:
 
-Everything here runs locally. If you want to try out the service, follow the steps below:
+Everything here runs locally. If you want to try out the service, follow the steps below (You will require Git Bash CLI for the following commands):
 1. Create a virtual environment. I used ```python version 3.10.11``` 
 2. To create an environment with that version of python using Conda: ```conda create -n <env-name> python=3.10.11```
     Just replace ```<env-name>``` with any title you want.
@@ -70,14 +72,16 @@ Everything here runs locally. If you want to try out the service, follow the ste
 
 
  **CAVEAT:**  Use this to spin up the MLflow server:   
+ 
    ```mlflow server --backend-store-uri sqlite:///local_server.db --default-artifact-root ./artifacts --host localhost --port 5000```
 
-   This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```. Do not spin it up yet until you are in the directory that you want to run its mode of 
-   deployment. This is very important.
+   This will create a directory ```artifacts``` on your local machine, as well as the database ```local_server.db```.
+   
+   **Wait!!! Do not spin it up yet until you are ready to track runs and make use of the MLflow server. This is very important.**
   
 
 
-### 1. Running the container (Dockerfile)
+### 1. Docker container
 
 
 First, you need to have docker installed on your system. I am using a windows machine, and I have docker desktop installed on my system. If you do not have that then you should try doing that first. If you are all set and good, then proceed.
@@ -108,6 +112,7 @@ ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "predict:app" ]
 
 
 If the container is up and running, 
+
 5. Open up a new terminal. Reactivate the Conda environment. 
 6. Run ```python test.py <image-url>```
 
@@ -123,9 +128,9 @@ Still inside the webservice directory, you need to:
 1. Run  ```python predict.py``` to start this service.
 2. Perhaps you want to use a Web Service Gateway Interface (WSGI) like Waitress or Gunicorn:
    
-   ```waitress-serve --listen=0.0.0.0:9696 predict:app```           **OR**      
+   ```waitress-serve --listen=0.0.0.0:9696 predict:app```             **OR**      
 
-   ```gunicorn --bind=0.0.0.0:9696 predict:app```
+   ```gunicorn --bind=0.0.0.0:9696 predict:app```   depending on what local machine you have.
 
 3. After starting this service, open up a new terminal. Run ```python test.py <image-url>```
 
@@ -138,7 +143,7 @@ Still inside the webservice directory, you need to:
 ### 3. Web service hosted and managed on MLflow servers
 
 Still inside the webservice directory, 
-1. Navigate to server.
+1. Navigate to ```server```.
 2. Spin up the MLflow server using the command mentioned earlier.
 3. Run:   ```python tracking_predict.py``` in one terminal, followed by  ```python tracking_test.py <image-url>```
 
@@ -146,24 +151,25 @@ Still inside the webservice directory,
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
 
 
-   **Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run
-   
-4. ```python register_model.py ```
+   **Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run  ```python register_model.py ```
 
  
 
 
 
-### 4. Batch mode (Scheduling)
+### 4. Batch mode (Scheduling with Prefect Orion server)
 
 
-1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. Also create a directory called  ```output```. This is for saving the output predictions locally. Your run will not be completed if you omit any of these steps.
+1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. If you have not created the ```output``` directory yet, then create one. This is for saving the output predictions locally.
+   
+    **Your run will not be completed if you omit any part of this step.**
+    
 2. Spin up Prefect server with  ```prefect server start```
-3. In another window, set its configuration to local ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
+3. In another window, set its configuration to local configuration   ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
 4. Spin up the MLflow server.
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
 6. Replace ```<name_of_pool>``` with any title you want for your work pool.
-7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. 
+7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
 8. Schedule a deployment using CRON    ```python batch_deploy.py```
 
 
@@ -177,14 +183,13 @@ Still inside the webservice directory,
 
 9. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>``` to initiate a flow.
    
-   Replace ```<MLflow Run ID>``` with your MLflow Run ID. Same to ```<your_email_address>```  and ``` <email_app_password>``` too. 
+    Replace ```<MLflow Run ID>``` with your MLflow Run ID. Same to ```<your_email_address>```  and ``` <email_app_password>``` too. 
 
 10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
 
 
-    Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. To do this, 
-
-11. Open  ```batch_deploy.py``` with a text editor and adjust the CRON digits.
+    Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. To do this, open  
+    ```batch_deploy.py``` with a text editor and adjust the CRON digits.
 
 
     For more on CRON, [Click Here.](https://crontab.guru/)
