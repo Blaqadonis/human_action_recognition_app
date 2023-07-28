@@ -179,12 +179,14 @@ Still inside the webservice directory,
 
    Replace ```<your-testing-batch>``` with your testing batch , ```<MLflow Run ID>``` with your MLflow Run ID, and ```<your-cron-expression>``` with your cron digits.
 
-   For example, to schedule a deployment to run on the first day of every month at midnight    ```python batch_deploy.py Testing_set.csv <MLflow Run ID> 0 0 1 * *```.
+   For example, to schedule a deployment to run on the first day of every month at midnight, run:
 
-   CRON Generator >>>   [Click Here.](https://crontab.guru/)
+   ```python batch_deploy.py Testing_set.csv <MLflow Run ID> 0 0 1 * *```.
+
+   More on Cron digits >>>   [Cron Expression Editor.](https://crontab.guru/)
 
 
-   I created a separate file which is basically ```batch.py``` but with ***extra razzmatazz mixed with a likkle bit of sauce***. This file ```custom_batch.py``` can send you notifications on the status of the 
+   I created a separate file which is basically ```batch.py``` but with ***a likkle bit of razzmatazz mixed with extra sauce***. This file ```custom_batch.py``` can send you notifications on the status of the 
    run. It also contains a report about the predictions for documentation purposes. To run this, you require an email account password. This app password will provide access to your email account without 
    revealing your actual account password. 
    For more on this >>> [Google.](https://support.google.com/mail/answer/185833?hl=en)
@@ -193,8 +195,8 @@ Still inside the webservice directory,
 
    If you now have your email app password, 
 
-9. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
-10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
+10. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
+11. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
 
    Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, <logger-path> with your logger-path, and 
    <your-cron-expression> with your cron digits.
