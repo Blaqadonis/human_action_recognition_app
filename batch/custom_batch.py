@@ -100,17 +100,13 @@ def apply_model(csv_file, run_id, output_file):
 @flow
 def send_update(block: str, email_address: str, password: str):
     '''Notify the ML engineer'''
-    block = block
-    password = password
-    
     credentials = EmailServerCredentials(
     username=email_address,
     password=password,  # must be an app password
     )
     credentials.save(block, overwrite=True)
     email_server_credentials = EmailServerCredentials.load(block)
-    
-    subject = email_send_message.with_options(name=f"email {email_address}").submit(
+    email_send_message.with_options(name=f"email {email_address}").submit(
     email_server_credentials=email_server_credentials,
     subject="Batch Testing Run Status",
     msg="Run completed!!",
@@ -125,7 +121,7 @@ def run():
     block = sys.argv[3]   #'update-me'
     email = sys.argv[4]   #'your-email-address'
     password = sys.argv[5]  #'your-app-password'
-    output_file = 'output/result.csv'   
+    output_file = '{sys.argv[6]}/result.csv' # 'output-file-path'
     apply_model(csv_file=csv_file, run_id=run_id, output_file=output_file)
     send_update(block=block, email_address=email, password=password)
     return print('Run completed! Status sent to your email.')

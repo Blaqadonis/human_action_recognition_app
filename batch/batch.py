@@ -77,12 +77,11 @@ def apply_model(csv_file, run_id, output_file):
 @flow
 def run():
     '''run function'''
-    csv_file = sys.argv[1]  # 'Testing_set.csv'
-    run_id = sys.argv[2]  # 'your-MLflow-Run_id'
-    output_file = 'output/result.csv'
-   
-    apply_model(csv_file=csv_file, run_id=run_id, output_file=output_file)
+    apply_model(csv_file=CSV_FILE, run_id=RUN_ID, output_file=OUTPUT_FILE)
     return print('Done!')
 
 if __name__ == '__main__':
     run()
+    CSV_FILE = sys.argv[1]  # 'Testing_set.csv'
+    RUN_ID = sys.argv[2]  # 'your-MLflow-Run_id'
+    OUTPUT_FILE = '{sys.argv[3]}/result.csv' # 'output-file-path'

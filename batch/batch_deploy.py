@@ -10,7 +10,7 @@ deployment = Deployment.build_from_flow(
         "csv_file": sys.argv[1],
         "run_id": sys.argv[2],
     },
-    schedule=CronSchedule(cron="0 0 1 * *"), #first of every month
+    schedule=CronSchedule(cron=sys.argv[3]), #your-cron-expression
     work_queue_name="big",
 )
 
