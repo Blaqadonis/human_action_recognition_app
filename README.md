@@ -176,7 +176,7 @@ Still inside the webservice directory,
    
    Replace ```<name_of_pool>``` with any title you want for your work pool.
    
-6. Run:   ```python batch.py <your-testing-batch> <MLflow Run ID> <logger-path>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
+6. Run:   ```python batch.py <your-testing-batch> <MLflow Run ID> <logger-path>``` to initiate a flow.
 7. Schedule a deployment using CRON    ```python batch_deploy.py <your-testing-batch> <MLflow Run ID> <logger-path> <your-cron-expression>```
 
    Replace ```<your-testing-batch>``` with your testing batch , ```<MLflow Run ID>``` with your MLflow Run ID, ```<logger-path>``` with your logger-path, and ```<your-cron-expression>``` with your cron digits.
