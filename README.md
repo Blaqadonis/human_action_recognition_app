@@ -67,7 +67,7 @@ Everything here runs locally. If you want to try out the service, follow the ste
 6. Run ```pip install -r requirements.txt``` to install all necessary external dependencies.
 7. Create a directory and name it ```data```. Inside it cut and paste ```train``` directory and ```Training_set.csv```. This is only important if you want to run the notebook.
 8. Create a directory and name it ```output```. This is important if you want to run batch deployment.
-9. Cut ```test``` directory and paste into ```batch``` directory. For educative purposes, I will be using ```Testing_set.csv``` for scheduled deployment. Cut and paste that file in the ```batch``` directory.
+9. Cut ```test``` directory and paste into ```batch``` directory. I will be using ```Testing_set.csv``` for scheduled deployment. Cut and paste that file in the ```batch``` directory.
  
 
 
@@ -118,7 +118,8 @@ If the container is up and running,
 
 
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
-7. Edit it as much as you want and try out predictions on some other images of humans performing any of the 14 activities listed above.
+   
+   Edit it as much as you want and try out predictions on some other images of humans performing any of the 14 activities listed above.
 
 
 
@@ -136,7 +137,8 @@ Still inside the webservice directory, you need to:
 
 
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
-7. Edit it as much as you want, and try out predictions on some other images of humans performing any of the 14 activities listed above, to use the service.
+   
+   Edit it as much as you want, and try out predictions on some other images of humans performing any of the 14 activities listed above, to use the service.
 
 
 
@@ -151,7 +153,10 @@ Still inside the webservice directory,
    **NOTE:**  Replace ```<image-url>``` with the url of the image you are trying to predict the human activity in it.
 
 
-   **Caveat:** ```register_model.py```  is a script that enters your model into the mlflow registry when you run  ```python register_model.py ```
+   **Caveat:** ```register_model.py```  is a script that enters your model into the MLflow registry, and also transitions it to production stage.
+
+
+4. To register your  model with MLflow registry, and to elevate its stage to production stage, run  ```python register_model.py ```
 
  
 
@@ -160,7 +165,7 @@ Still inside the webservice directory,
 ### 4. Batch mode (Scheduling with Prefect Orion server)
 
 
-1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. If you have not created the ```output``` directory yet, then create one. This is for saving the output predictions locally.
+1. Navigate to ```batch```. Ensure that your testing batch files; the image files directory which you must name ```test```, and their annotations (.csv) are present here. For this project, I will be using ```test``` and  ```Testing_set.csv``` files from the zip file. Please explore the content of these two files if you will be using a different testing batch to understand how to structure your data inputs. In addition to this, you have to provide a reference path for your loggings after every scheduled deployment completes. For easy reference, let us call it ```logger-path```. It can be any external data storage like S3 bucket, or Azure Blob Storage; it will work fine. You can also create a new directory locally and note down whatever name you call it. You will be needing this name for all your batch runs. 
    
     **Your run will not be completed if you omit any part of this step.**
     
@@ -169,34 +174,35 @@ Still inside the webservice directory,
 4. Spin up the MLflow server.
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
 6. Replace ```<name_of_pool>``` with any title you want for your work pool.
-7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
-8. Schedule a deployment using CRON    ```python batch_deploy.py```
+7. Run:   ```python batch.py ```<your-testing-batch>``` <MLflow Run ID> <logger-path>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
+8. Schedule a deployment using CRON    ```python batch_deploy.py <your-testing-batch> <MLflow Run ID> <your-cron-expression>```
+
+   Replace ```<your-testing-batch>``` with your testing batch , ```<MLflow Run ID>``` with your MLflow Run ID, and ```<your-cron-expression>``` with your cron digits.
+
+   For example, to schedule a deployment to run on the first day of every month at midnight, run:
+
+   ```python batch_deploy.py Testing_set.csv <MLflow Run ID> 0 0 1 * *```.
+
+   More on Cron digits >>>   [Cron Expression Editor.](https://crontab.guru/)
 
 
-   I created a separate file which is just ```batch.py``` but with extra stuff. This file ```custom_batch.py``` can send you notifications straight to your inbox about the status of the run. It also contains a 
-   report about the predictions for documenting. To run this, you require an email account password. This app password will provide access to your email account without revealing your actual account password. 
+   I created a separate file which is basically ```batch.py``` but with ***a likkle bit of razzmatazz mixed with extra sauce***. This file ```custom_batch.py``` can send you notifications on the status of the 
+   run. It also contains a report about the predictions for documentation purposes. To run this, you require an email account password. This app password will provide access to your email account without 
+   revealing your actual account password. 
    For more on this >>> [Google.](https://support.google.com/mail/answer/185833?hl=en)
 
 
 
    If you now have your email app password, 
 
-9. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>``` to initiate a flow.
+10. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
+11. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
+
+   Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, <logger-path> with your logger-path, and 
+   <your-cron-expression> with your cron digits.
+
+
    
-    Replace ```<MLflow Run ID>``` with your MLflow Run ID. Same to ```<your_email_address>```  and ``` <email_app_password>``` too. 
-
-10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password>```
-
-
-    Deployment is currently scheduled to run on the first day of every month at midnight. However, you can edit the scheduled date to whenever you wish the deployment to be done. To do this, open  
-    ```batch_deploy.py``` with a text editor and adjust the CRON digits.
-
-
-    For more on CRON, [Click Here.](https://crontab.guru/)
-
-
-
-
 
 
 ### 5. Monitoring
