@@ -165,7 +165,7 @@ Still inside the webservice directory,
 ### 4. Batch mode (Scheduling with Prefect Orion server)
 
 
-1. Navigate to ```batch```. Ensure that  ```test``` and  ```Testing_set.csv``` ,from the zip file, exist here. If you have not created the ```output``` directory yet, then create one. This is for saving the output predictions locally.
+1. Navigate to ```batch```. Ensure that your testing batch files; the image files directory which you must name ```test```, and their annotations (.csv) are present here. For this project, I will be using ```test``` and  ```Testing_set.csv``` files from the zip file. Please explore the content of these two files if you will be using a different testing batch to understand how to structure your data inputs. In addition to this, you have to provide a reference path for your loggings after every scheduled deployment completes. For easy reference, let us call it ```logger-path```. It can be any external data storage like S3 bucket, or Azure Blob Storage; it will work fine. You can also create a new directory locally and note down whatever name you call it. You will be needing this name for all your batch runs. 
    
     **Your run will not be completed if you omit any part of this step.**
     
@@ -174,15 +174,14 @@ Still inside the webservice directory,
 4. Spin up the MLflow server.
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
 6. Replace ```<name_of_pool>``` with any title you want for your work pool.
-7. Run:   ```python batch.py Testing_set.csv <MLflow Run ID>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
+7. Run:   ```python batch.py ```<your-testing-batch>``` <MLflow Run ID> <logger-path>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
 8. Schedule a deployment using CRON    ```python batch_deploy.py <your-testing-batch> <MLflow Run ID> <your-cron-expression>```
 
-   Replace ```<your-testing-batch>``` with the files, in a .csv format, that you want to run the scheduled deployment on which in my case I will use ```Testing_set.csv```, ```<MLflow Run ID>``` with your MLflow Run ID, and 
-   ```<your-cron-expression>``` with your cron digits.
+   Replace ```<your-testing-batch>``` with your testing batch , ```<MLflow Run ID>``` with your MLflow Run ID, and ```<your-cron-expression>``` with your cron digits.
 
    For example, to schedule a deployment to run on the first day of every month at midnight    ```python batch_deploy.py Testing_set.csv <MLflow Run ID> 0 0 1 * *```.
 
-   For more on CRON   [Click Here.](https://crontab.guru/)
+   CRON Generator >>>   [Click Here.](https://crontab.guru/)
 
 
    I created a separate file which is basically ```batch.py``` but with ***extra razzmatazz mixed with a likkle bit of sauce***. This file ```custom_batch.py``` can send you notifications on the status of the 
@@ -194,23 +193,14 @@ Still inside the webservice directory,
 
    If you now have your email app password, 
 
-11. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>``` to initiate a flow. 
-12. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
+9. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
+10. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
 
-    Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, and <your-cron-expression> with your cron 
-    digits.
+   Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, <logger-path> with your logger-path, and 
+   <your-cron-expression> with your cron digits.
 
 
    
-
-
-    
-
-   
-
-
-
-
 
 
 ### 5. Monitoring
