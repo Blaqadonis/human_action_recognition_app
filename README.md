@@ -200,8 +200,8 @@ Still inside the webservice directory,
 8. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
 9. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
 
-   Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, <logger-path> with your logger-path, and 
-   <your-cron-expression> with your cron digits.
+   Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, ```<logger-path>``` with your logger-path, and 
+   ```<your-cron-expression>``` with your cron digits.
 
 
    
