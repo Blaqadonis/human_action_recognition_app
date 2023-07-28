@@ -165,7 +165,7 @@ Still inside the webservice directory,
 ### 4. Batch mode (Scheduling with Prefect Orion server)
 
 
-1. Navigate to ```batch```. Ensure that your testing batch files; the image files directory which you must name ```test```, and their annotations (.csv) are present here. For this project, I will be using ```test``` and  ```Testing_set.csv``` files that are available. Please explore the content of these two files if you will be using a different testing batch to understand how to structure your files. You have to provide a reference path for your logs and reports after every scheduled deployment completes. For easy reference, let us call it ```logger-path```. It can be any external data storage like S3 bucket, or Azure Blob Storage; it will work fine. You can also create a new directory on your local machine and note down whatever name you call it. You will be needing this name for all your batch runs. 
+1. Navigate to ```batch```. Ensure that your testing batch files, that is the file directory which you must name ```test```, and their annotations (.csv) are present here. For this project, I will be using ```test``` and  ```Testing_set.csv``` files that are available. Please explore the content of these two files if you will be using a different testing batch to understand how to structure your files. You have to provide a reference path for your logs and reports after every scheduled deployment completes. For easy reference, let us call it ```logger-path```. It can be any external data storage like S3 bucket, or Azure Blob Storage; it will work fine. You can also create a new directory on your local machine and note down whatever name you call it. You will be needing this name for all your batch runs. 
    
     **Your run will not be completed if you omit any part of this step.**
     
@@ -173,9 +173,11 @@ Still inside the webservice directory,
 3. In another window, set its configuration to local configuration   ```prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api```
 4. Spin up the MLflow server.
 5. Create and start a process pool with  ```prefect worker start -p <name_of_pool> -t process```
-6. Replace ```<name_of_pool>``` with any title you want for your work pool.
-7. Run:   ```python batch.py ```<your-testing-batch>``` <MLflow Run ID> <logger-path>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
-8. Schedule a deployment using CRON    ```python batch_deploy.py <your-testing-batch> <MLflow Run ID> <logger-path> <your-cron-expression>```
+   
+   Replace ```<name_of_pool>``` with any title you want for your work pool.
+   
+6. Run:   ```python batch.py ```<your-testing-batch>``` <MLflow Run ID> <logger-path>``` to initiate a flow. Edit this ```<MLflow Run ID>```.
+7. Schedule a deployment using CRON    ```python batch_deploy.py <your-testing-batch> <MLflow Run ID> <logger-path> <your-cron-expression>```
 
    Replace ```<your-testing-batch>``` with your testing batch , ```<MLflow Run ID>``` with your MLflow Run ID, ```<logger-path>``` with your logger-path, and ```<your-cron-expression>``` with your cron digits.
 
@@ -195,8 +197,8 @@ Still inside the webservice directory,
 
    If you now have your email app password, 
 
-10. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
-11. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
+8. Run   ```python custom_batch.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <logger-path>``` to initiate a flow.
+9. Schedule a deployment    ```python custom_batch_deploy.py Testing_set.csv <MLflow Run ID> update-me <your_email_address> <email_app_password> <your-cron-expression>```
 
    Replace ```<MLflow Run ID>``` with your MLflow Run ID, ```<your_email_address>``` with your email address, ``` <email_app_password>``` with your app password, <logger-path> with your logger-path, and 
    <your-cron-expression> with your cron digits.
