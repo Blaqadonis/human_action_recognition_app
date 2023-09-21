@@ -2,7 +2,7 @@ import os
 import pytest
 from PIL import Image
 from predict import preprocess_image, predict
-
+p
 
 def test_preprocess_image():
     '''Test preprocessing function'''
