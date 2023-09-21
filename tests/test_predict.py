@@ -4,6 +4,7 @@ from PIL import Image
 from predict import preprocess_image, predict
 
 
+
 def test_preprocess_image():
     '''Test preprocessing function'''
     image = Image.new('RGB', (160, 160))
